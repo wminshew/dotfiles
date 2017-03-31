@@ -98,9 +98,10 @@ export PATH="/usr/local/bin:$PATH"
 source /usr/local/bin/virtualenvwrapper.sh
 
 # fast.ai aws alias
-source ~/aws-alias.sh
+# source ~/aws-alias.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
+fpath=(/usr/local/share/zsh-completions $fpath)
