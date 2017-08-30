@@ -3,6 +3,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 
 Plug 'ggreer/the_silver_searcher'
 
@@ -18,6 +19,10 @@ Plug 'junegunn/seoul256.vim'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'scrooloose/nerdcommenter'
+
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 
@@ -28,13 +33,29 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
 
 Plug 'vim-scripts/closetag.vim'
+Plug 'alvan/vim-closetag'
+Plug 'Valloric/MatchTagAlways'
 
 Plug 'Valloric/YouCompleteMe'
+" Plug 'ternjs/tern_for_vim'
+" Plug 'Shougo/neocomplete.vim'
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 
 Plug 'majutsushi/tagbar'
+
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+" Plug 'vim-syntastic/syntastic'
+" Plug 'othree/javascript-libraries-syntax.vim'
+
+" Vim plugin for rails development
+Plug 'tpope/vim-rails'
+
+" vim plugin for nodejs dev
+Plug 'moll/vim-node'
 
 call plug#end()
 
@@ -100,3 +121,53 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 " Toggle tagbar to get overview of file class structure
 nmap <F8> :TagbarToggle<CR>
 
+" set standard tab width to 4 spaces (from default 8)
+set tabstop=4
+set softtabstop=0 noexpandtab
+set shiftwidth=4
+
+" allow jsx in normal js files
+let g:jsx_ext_required = 0
+
+" static typing with javascript flow.org
+" let g:javascript_plugin_flow = 1
+
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" filenames like *.xml, *.html, *.xhtml, ...
+" Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non closing tags self closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" integer value [0|1]
+" This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is '<leader>>'
+"
+let g:closetag_close_shortcut = '<leader>>'
+
+" Map ctrl-n to toggling NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Allow buffer to be closed without terminating current window (showing said
+" buffer). Note: I think other windows showing the closed buffer will still be
+" terminated
+command! Bd bp|bd#

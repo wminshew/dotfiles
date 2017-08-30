@@ -95,13 +95,23 @@ export PATH="/Users/wminshew/anaconda2/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 # virtualenv / virtualenvwrapper
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # fast.ai aws alias
 # source ~/aws-alias.sh
+export testtfInstanceIp="ec2-35-164-61-121.us-west-2.compute.amazonaws.com"
+export fastaiInstanceIp="ec2-35-167-61-73.us-west-2.compute.amazonaws.com"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# temp env variables
+export FOOD2FORK_KEY="cc07ed6ea34849e89c3b2ffce9fa2e94"
+
+# taken from .bash_profile; not sure if this will work. If showing ruby 2.0,
+# try calling $ source ~/.bash_profile
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
