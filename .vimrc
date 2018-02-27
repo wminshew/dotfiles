@@ -32,7 +32,7 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'tomtom/tcomment_vim'
 
-Plug 'vim-scripts/closetag.vim'
+" Plug 'vim-scripts/closetag.vim'
 Plug 'alvan/vim-closetag'
 Plug 'Valloric/MatchTagAlways'
 
@@ -57,10 +57,21 @@ Plug 'tpope/vim-rails'
 " vim plugin for nodejs dev
 Plug 'moll/vim-node'
 
+" zoom into window splits and back out
+" Plug 'ZoomWin'
+
+" Go language support
+Plug 'fatih/vim-go'
+
 call plug#end()
 
+" activates filetype detection
+filetype plugin on
+" activates syntax highlighting among other things
+syntax on
+" adds line #s on let
 set number
-
+" sets color scheme
 colo seoul256
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -121,10 +132,14 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 " Toggle tagbar to get overview of file class structure
 nmap <F8> :TagbarToggle<CR>
 
-" set standard tab width to 4 spaces (from default 8)
-set tabstop=4
-set softtabstop=0 noexpandtab
-set shiftwidth=4
+" set standard tab width to 2 spaces (from default 8)
+filetype plugin indent on
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set modeline
 
 " allow jsx in normal js files
 let g:jsx_ext_required = 0
@@ -144,12 +159,12 @@ let g:jsx_ext_required = 0
 " filenames like *.xml, *.html, *.xhtml, ...
 " Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
 "
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.js'
 
 " filenames like *.xml, *.xhtml, ...
 " This will make the list of non closing tags self closing in the specified files.
 "
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
 
 " integer value [0|1]
 " This will make the list of non closing tags case sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
@@ -171,3 +186,5 @@ map <C-n> :NERDTreeToggle<CR>
 " buffer). Note: I think other windows showing the closed buffer will still be
 " terminated
 command! Bd bp|bd#
+
+let g:ackprg = 'ag --nogroup --nocolor --column'

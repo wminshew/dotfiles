@@ -95,7 +95,16 @@ export PATH="/Users/wminshew/anaconda2/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 # virtualenv / virtualenvwrapper
-# source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Development
+source /usr/local/bin/virtualenvwrapper.sh
+
+# pipsi installation
+export PATH=/Users/wminshew/.local/bin:$PATH
+
+# set GOPATH
+export GOPATH=$HOME/Development/go
+export PATH=$PATH:$GOPATH/bin
 
 # fast.ai aws alias
 # source ~/aws-alias.sh
