@@ -68,6 +68,9 @@ Plug 'moll/vim-node'
 " Go language support
 Plug 'fatih/vim-go'
 
+" Delete buffers without closing windows
+Plug 'qpkorr/vim-bufkill'
+
 call plug#end()
 
 " activates filetype detection
