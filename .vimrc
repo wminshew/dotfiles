@@ -13,7 +13,7 @@ Plug 'tpope/vim-surround'
 Plug 'ggreer/the_silver_searcher'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -53,7 +53,9 @@ Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
-" Plug 'vim-syntastic/syntastic'
+Plug 'elzr/vim-json'
+
+Plug 'vim-syntastic/syntastic'
 " Plug 'othree/javascript-libraries-syntax.vim'
 
 " Vim plugin for rails development
@@ -196,3 +198,15 @@ map <C-n> :NERDTreeToggle<CR>
 command! Bd bp|bd#
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" syntastic recommended starter settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers = ['eslint']
