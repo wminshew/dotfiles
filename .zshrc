@@ -124,3 +124,6 @@ export FOOD2FORK_KEY="cc07ed6ea34849e89c3b2ffce9fa2e94"
 # try calling $ source ~/.bash_profile
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
+export PATH=/usr/local/cuda-9.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
