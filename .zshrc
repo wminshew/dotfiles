@@ -106,11 +106,6 @@ export PATH=/Users/wminshew/.local/bin:$PATH
 export GOPATH=$HOME/Development/go
 export PATH=$PATH:$GOPATH/bin
 
-# fast.ai aws alias
-# source ~/aws-alias.sh
-export testtfInstanceIp="ec2-35-164-61-121.us-west-2.compute.amazonaws.com"
-export fastaiInstanceIp="ec2-35-167-61-73.us-west-2.compute.amazonaws.com"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
@@ -127,3 +122,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
 export PATH=/usr/local/cuda-9.0/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+# make sure ~/.zsh_history doesn't belong to root..
+unsetopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
