@@ -41,7 +41,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'alvan/vim-closetag'
 Plug 'Valloric/MatchTagAlways'
 
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " Plug 'ternjs/tern_for_vim'
 " Plug 'Shougo/neocomplete.vim'
 
