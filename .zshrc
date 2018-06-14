@@ -126,3 +126,9 @@ export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY
 # make sure ~/.zsh_history doesn't belong to root..
 unsetopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/will/Development/google-cloud-sdk/path.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/will/Development/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/completion.zsh.inc'; fi
