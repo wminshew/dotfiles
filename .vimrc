@@ -46,7 +46,7 @@ Plug 'Valloric/MatchTagAlways'
 " Plug 'Shougo/neocomplete.vim'
 
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-easytags'
 
 Plug 'majutsushi/tagbar'
 

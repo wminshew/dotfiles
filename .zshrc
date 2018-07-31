@@ -132,3 +132,12 @@ if [ -f '/home/will/Development/google-cloud-sdk/path.zsh.inc' ]; then source '/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/will/Development/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/completion.zsh.inc'; fi
+
+# set default editor to vim
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+source <(kubectl completion zsh)  # setup autocomplete in zsh into the current shell
+echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # add autocomplete permanently to your zsh shell
+if [ /home/will/Development/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
+if [ /home/will/Development/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
