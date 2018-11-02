@@ -41,9 +41,24 @@ Plug 'tomtom/tcomment_vim'
 Plug 'alvan/vim-closetag'
 Plug 'Valloric/MatchTagAlways'
 
+" Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'ternjs/tern_for_vim'
-" Plug 'Shougo/neocomplete.vim'
+
+" javascript completion
+" must install tern: npm install -g tern
+Plug 'carlitux/deoplete-ternjs'
+
+" typescript completion
+Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'mhartington/nvim-typescript'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+
+" python completion
+Plug 'zchee/deoplete-jedi'
 
 Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-easytags'
@@ -232,5 +247,8 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " show vim window for warnings or errors
 " let g:ale_open_list = 1
 
-" Enable completion where available.
+" Enable completion via ALE where available.
 " let g:ale_completion_enabled = 1
+
+" Enable deoplete at startup
+let g:deoplete#enable_at_startup = 1
