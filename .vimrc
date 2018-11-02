@@ -55,7 +55,8 @@ Plug 'mxw/vim-jsx'
 
 Plug 'elzr/vim-json'
 
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
+" Plug 'vim-syntastic/syntastic'
 " Plug 'othree/javascript-libraries-syntax.vim'
 
 " Vim plugin for rails development
@@ -73,12 +74,18 @@ Plug 'fatih/vim-go'
 " Delete buffers without closing windows
 Plug 'qpkorr/vim-bufkill'
 
+" syntax for dockerfiles
+Plug 'ekalinin/Dockerfile.vim'
+
+" syntax for vue
+Plug 'posva/vim-vue'
+
 call plug#end()
 
 " activates filetype detection
-filetype plugin on
+" filetype plugin on
 " activates syntax highlighting among other things
-syntax on
+" syntax on
 " adds line #s on let
 set number
 " sets color scheme
@@ -102,7 +109,7 @@ map gn :bn<CR>
 map gp :bp<CR>
 
 " enhanced autocomplete; does this conflict w/ YouCompleteMe?
-set wildmenu
+" set wildmenu
 
 " fix cursor issues w/ tmux
 if exists('$ITERM_PROFILE')
@@ -157,15 +164,6 @@ let g:jsx_ext_required = 0
 " static typing with javascript flow.org
 " let g:javascript_plugin_flow = 1
 
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
 " filenames like *.xml, *.html, *.xhtml, ...
 " Then after you press <kbd>&gt;</kbd> in these files, this plugin will try to close the current tag.
 "
@@ -199,14 +197,40 @@ command! Bd bp|bd#
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" syntastic recommended starter settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Fix javascript files with prettier, and then ESLint.
+let g:ale_fixers = {
+\ 'javascript': ['prettier', 'eslint'],
+\ 'typescript': ['tslint'],
+\}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
 
-let g:syntastic_javascript_checkers = ['eslint']
+" Keep vim from slowing down too much while syntax highlighting vue (single
+" file components have multiple languages)
+let g:vue_disable_pre_processors=1
+
+" prevent vim from getting confused by multiple language vue files
+autocmd FileType vue syntax sync fromstart
+
+" set compound filetype to use existing html, css & javascript configurations
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+" shortcut for :ALEFix by pressing <leader>d
+nmap <leader>d <Plug>(ale_fix)
+
+" keep sign gutter open
+let g:ale_sign_column_always = 1
+
+" Set this. Airline will handle the rest.
+" let g:airline#extensions#ale#enabled = 1
+
+" map movement through ALE errors with wrapping
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" show vim window for warnings or errors
+" let g:ale_open_list = 1
+
+" Enable completion where available.
+" let g:ale_completion_enabled = 1

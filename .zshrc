@@ -52,7 +52,7 @@ ZSH_THEME="half-life"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git kubectl gcloud docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -137,7 +137,6 @@ if [ -f '/home/will/Development/google-cloud-sdk/completion.zsh.inc' ]; then sou
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-source <(kubectl completion zsh)  # setup autocomplete in zsh into the current shell
-echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # add autocomplete permanently to your zsh shell
-if [ /home/will/Development/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
-if [ /home/will/Development/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
+# source <(kubectl completion zsh)  # setup autocomplete in zsh into the current shell
+# echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # add autocomplete permanently to your zsh shell
+# if [ -f '/home/will/Development/google-cloud-sdk/bin/kubectl' ]; then source <(kubectl completion zsh); fi
