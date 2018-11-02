@@ -252,3 +252,10 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
+
+" Add extra filetypes
+let g:deoplete#sources#ternjs#filetypes = [
+\ 'jsx',
+\ 'javascript.jsx',
+\ 'vue',
+\ ]
