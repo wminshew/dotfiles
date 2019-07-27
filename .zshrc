@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 #
 #
 # alias dropbox ="~/bin/dropbox.py"
+alias startx="sudo systemctl isolate graphical.target"
 
 # added by Anaconda2 4.2.0 installer
 export PATH="/Users/wminshew/anaconda2/bin:$PATH"
@@ -112,16 +113,13 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# temp env variables
-export FOOD2FORK_KEY="cc07ed6ea34849e89c3b2ffce9fa2e94"
-
 # taken from .bash_profile; not sure if this will work. If showing ruby 2.0,
 # try calling $ source ~/.bash_profile
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
-export PATH=/usr/local/cuda-9.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# # export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
+# export PATH=/usr/local/cuda-9.0/bin:$PATH
+# export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 # make sure ~/.zsh_history doesn't belong to root..
 unsetopt INC_APPEND_HISTORY
@@ -137,6 +135,7 @@ if [ -f '/home/will/Development/google-cloud-sdk/completion.zsh.inc' ]; then sou
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# source <(kubectl completion zsh)  # setup autocomplete in zsh into the current shell
-# echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # add autocomplete permanently to your zsh shell
-# if [ -f '/home/will/Development/google-cloud-sdk/bin/kubectl' ]; then source <(kubectl completion zsh); fi
+source <(kubectl completion zsh)  # setup autocomplete in zsh into the current shell
+
+# add linkerd to path
+export PATH=$PATH:$HOME/.linkerd2/bin

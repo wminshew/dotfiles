@@ -41,21 +41,26 @@ Plug 'tomtom/tcomment_vim'
 Plug 'alvan/vim-closetag'
 Plug 'Valloric/MatchTagAlways'
 
-" Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'ternjs/tern_for_vim'
+" autocompletion
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
 " javascript completion
-" must install tern: npm install -g tern
-Plug 'carlitux/deoplete-ternjs'
+Plug 'carlitux/deoplete-ternjs' " must have tern installed: npm i -g tern
+" Plug 'ternjs/tern_for_vim'
 
 " typescript completion
 Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'mhartington/nvim-typescript'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+if has('nvim')
+  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+endif
+" For Denite features
+" Plug 'Shougo/denite.nvim'
 
 " python completion
 Plug 'zchee/deoplete-jedi'
@@ -98,11 +103,13 @@ Plug 'posva/vim-vue'
 call plug#end()
 
 " activates filetype detection
-" filetype plugin on
+filetype plugin on
 " activates syntax highlighting among other things
 " syntax on
 " adds line #s on let
 set number
+" allows user to change buffers without saving
+set hidden
 " sets color scheme
 colo seoul256
 
@@ -212,10 +219,15 @@ command! Bd bp|bd#
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
+" Enable all of the linters you want for Go.
+" let g:ale_linters = {
+" \ 'go': ['gometalinter'],
+" \}
+
 " Fix javascript files with prettier, and then ESLint.
 let g:ale_fixers = {
 \ 'javascript': ['prettier', 'eslint'],
-\ 'typescript': ['tslint'],
+\ 'typescript': ['prettier', 'tslint'],
 \}
 
 " Set this variable to 1 to fix files when you save them.
@@ -251,11 +263,17 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " let g:ale_completion_enabled = 1
 
 " Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " Add extra filetypes
-let g:deoplete#sources#ternjs#filetypes = [
-\ 'jsx',
-\ 'javascript.jsx',
-\ 'vue',
-\ ]
+" let g:deoplete#sources#ternjs#filetypes = [
+" \ 'jsx',
+" \ 'javascript.jsx',
+" \ 'vue',
+" \ ]
+"
+" let g:nvim_typescript#javascript_support = 1
+" let g:nvim_typescript#vue_support = 1
+
+" for vim-hug-neovim-rpc plugin
+set encoding=utf-8
