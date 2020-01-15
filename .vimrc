@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ggreer/the_silver_searcher'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -21,6 +22,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 
 Plug 'junegunn/seoul256.vim'
+Plug 'jonathanfilip/vim-lucius'
 
 Plug 'tpope/vim-fugitive'
 
@@ -110,8 +112,11 @@ filetype plugin on
 set number
 " allows user to change buffers without saving
 set hidden
+
 " sets color scheme
-colo seoul256
+" colo seoul256
+colorscheme lucius
+LuciusBlack
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -119,7 +124,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-set updatetime=250 " 250ms for updated signs, down from 4s default
+set updatetime=1250 " 750ms for updated signs, down from 4s default
 let g:gitgutter_max_signs = 500  " default value
 
 " open ~/.vimrc in new tab; :source on close
@@ -228,7 +233,10 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ale_fixers = {
 \ 'javascript': ['prettier', 'eslint'],
 \ 'typescript': ['prettier', 'tslint'],
+\ 'ruby': ['rubocop'],
 \}
+
+let g:ale_ruby_rubocop_executable = 'bundle exec rubocop'
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
@@ -277,3 +285,19 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " for vim-hug-neovim-rpc plugin
 set encoding=utf-8
+
+" Make CTRL-P use ag for listing the files. Way faster
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+" 'c' - the directory of the current file.
+" 'a' - the directory of the current file, unless it is a subdirectory of the cwd
+" 'r' - the nearest ancestor of the current file that contains one of these directories or files: .git .hg .svn .bzr _darcs
+" 'w' - modifier to "r": start search from the cwd instead of the current file's directory
+" 0 or '' (empty string) - disable this feature.
+let g:ctrlp_working_path_mode = 'ra'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows

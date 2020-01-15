@@ -125,6 +125,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 unsetopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
+# add gcloud to path
+export PATH=$PATH:$HOME/Development/google-cloud-sdk/bin
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/will/Development/google-cloud-sdk/path.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -139,3 +142,9 @@ source <(kubectl completion zsh)  # setup autocomplete in zsh into the current s
 
 # add linkerd to path
 export PATH=$PATH:$HOME/.linkerd2/bin
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/wminshew/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+# init rbenv
+eval "$(rbenv init -)"
