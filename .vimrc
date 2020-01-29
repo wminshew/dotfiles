@@ -68,9 +68,10 @@ endif
 Plug 'zchee/deoplete-jedi'
 
 Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
 
+" Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -82,7 +83,10 @@ Plug 'w0rp/ale'
 " Plug 'othree/javascript-libraries-syntax.vim'
 
 " Vim plugin for rails development
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rbenv'
 
 " vim plugin for nodejs dev
 Plug 'moll/vim-node'
@@ -110,6 +114,7 @@ filetype plugin on
 " syntax on
 " adds line #s on let
 set number
+" set nonumber
 " allows user to change buffers without saving
 set hidden
 
@@ -299,5 +304,13 @@ endif
 " 0 or '' (empty string) - disable this feature.
 let g:ctrlp_working_path_mode = 'ra'
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+" MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.swo,*.zip
+" Windows
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
