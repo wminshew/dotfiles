@@ -1,3 +1,6 @@
+# profiling zsh startup
+# zmodload zsh/zprof
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -96,9 +99,9 @@ export PATH="/Users/wminshew/anaconda2/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 # virtualenv / virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Development
-source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# export PROJECT_HOME=$HOME/Development
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # pipsi installation
 export PATH=/Users/wminshew/.local/bin:$PATH
@@ -113,8 +116,8 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# taken from .bash_profile; not sure if this will work. If showing ruby 2.0,
-# try calling $ source ~/.bash_profile
+# init rbenv
+# eval "$(rbenv init -)"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # # export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
@@ -146,5 +149,22 @@ export PATH=$PATH:$HOME/.linkerd2/bin
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/wminshew/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
-# init rbenv
-eval "$(rbenv init -)"
+# Speeds up load time
+DISABLE_UPDATE_PROMPT=true
+
+# Perform compinit only once a day.
+autoload -Uz compinit
+
+setopt EXTENDEDGLOB
+for dump in $ZSH_COMPDUMP(#qN.m1); do
+  compinit
+  if [[ -s "$dump" && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
+    zcompile "$dump"
+  fi
+  echo "Initializing Completions..."
+done
+unsetopt EXTENDEDGLOB
+compinit -C
+
+# profiling zsh startup
+# zprof
