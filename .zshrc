@@ -51,11 +51,15 @@ ZSH_THEME="half-life"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Set fzf installation directory path
+export FZF_BASE=/usr/local/bin/fzf
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl gcloud docker)
+plugins=(vi-mode colored-man-pages colorize git kubectl gcloud docker brew osx asdf fzf httpie heroku redis-cli)
+# other potentially interesting plugins: ruby rails python golang npm tmux
 
 source $ZSH/oh-my-zsh.sh
 
@@ -93,7 +97,7 @@ source $ZSH/oh-my-zsh.sh
 alias startx="sudo systemctl isolate graphical.target"
 
 # added by Anaconda2 4.2.0 installer
-export PATH="/Users/wminshew/anaconda2/bin:$PATH"
+# export PATH="/Users/wminshew/anaconda2/bin:$PATH"
 
 # Homebrew
 export PATH="/usr/local/bin:$PATH"
@@ -104,11 +108,11 @@ export PATH="/usr/local/bin:$PATH"
 # source /usr/local/bin/virtualenvwrapper.sh
 
 # pipsi installation
-export PATH=/Users/wminshew/.local/bin:$PATH
+# export PATH=/Users/wminshew/.local/bin:$PATH
 
 # set GOPATH
-export GOPATH=$HOME/Development/go
-export PATH=$PATH:$GOPATH/bin
+# export GOPATH=$HOME/Development/go
+# export PATH=$PATH:$GOPATH/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -129,25 +133,26 @@ unsetopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
 # add gcloud to path
-export PATH=$PATH:$HOME/Development/google-cloud-sdk/bin
+# export PATH=$PATH:$HOME/Development/google-cloud-sdk/bin
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/will/Development/google-cloud-sdk/path.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/home/will/Development/google-cloud-sdk/path.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/will/Development/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '/home/will/Development/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/completion.zsh.inc'; fi
 
 # set default editor to vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-source <(kubectl completion zsh)  # setup autocomplete in zsh into the current shell
+# completions added by oh-my-zsh plugin?
+# source <(kubectl completion zsh)  # setup autocomplete in zsh into the current shell
 
 # add linkerd to path
-export PATH=$PATH:$HOME/.linkerd2/bin
+# export PATH=$PATH:$HOME/.linkerd2/bin
 
 # heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/wminshew/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+# HEROKU_AC_ZSH_SETUP_PATH=/Users/wminshew/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
 # Speeds up load time
 DISABLE_UPDATE_PROMPT=true
@@ -165,6 +170,13 @@ for dump in $ZSH_COMPDUMP(#qN.m1); do
 done
 unsetopt EXTENDEDGLOB
 compinit -C
+
+# asdf version manager
+. /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+
+# ag completions
+. /usr/local/share/zsh/site-functions
 
 # profiling zsh startup
 # zprof
