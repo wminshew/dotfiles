@@ -332,3 +332,6 @@ map <leader>bl :BLines<cr>
 map <leader>h :History<cr> 
 " open FZF window search
 map <leader>w :Window<cr> 
+
+" exit insert mode with fd
+inoremap fd <esc>
