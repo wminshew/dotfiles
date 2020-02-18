@@ -133,7 +133,7 @@ set updatetime=1250 " 750ms for updated signs, down from 4s default
 let g:gitgutter_max_signs = 500  " default value
 
 " open ~/.vimrc in new tab; :source on close
-map <leader>vimrc :tabe $MYVIMRC<cr> 
+map <leader>vimrc :vsp $MYVIMRC<cr> 
 autocmd bufwritepost .vimrc source $MYVIMRC
 
 " buffers
@@ -226,6 +226,8 @@ map <C-n> :NERDTreeToggle<CR>
 " buffer). Note: I think other windows showing the closed buffer will still be
 " terminated
 command! Bd bp|bd#
+" write buffer before closing
+command! Bw w|bp|bd#
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
@@ -314,3 +316,19 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+" trace gutentags errors
+" let g:gutentags_trace = 1
+
+" open FZF buffer search
+map <leader>b :Buffers<cr> 
+" open FZF file search
+map <leader>f :Files<cr> 
+" open FZF buffer lines search
+map <leader>l :Lines<cr> 
+" open FZF current buffer lines search
+map <leader>bl :BLines<cr> 
+" open FZF history search
+map <leader>h :History<cr> 
+" open FZF window search
+map <leader>w :Window<cr> 
