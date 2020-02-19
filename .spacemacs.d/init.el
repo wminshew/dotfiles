@@ -38,20 +38,26 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
-     ;; better-defaults
+     (auto-completion :variables
+        auto-completion-enable-snippets-in-popup t
+        ;; tab key to complete as much of common completion as possible
+        auto-completion-tab-key-behavior 'cycle
+        ;; automatic docstring display
+        auto-completion-enable-help-tooltip t
+        ;; enable the most frequent matches to show first
+        auto-completion-enable-sort-by-usage t)
      emacs-lisp
      git
      helm
      (html :variables
-         web-fmt-tool 'prettier)
+        web-fmt-tool 'prettier)
      (javascript :variables
         javascript-import-tool 'import-js
         javascript-backend 'lsp
         javascript-lsp-linter nil
         ;; if using flow, js2-mode sometimes gets confused
-        ;; js2-mode-show-strict-warnings nil
-        ;; js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil
+        js2-mode-show-parse-errors nil
         javascript-fmt-tool 'prettier
         node-add-modules-path t
         js2-include-node-externs t)
@@ -66,7 +72,7 @@ This function should only modify configuration layer settings."
      react
      (ruby :variables
         ;; ruby-enable-enh-ruby-mode	t
-        ;; ruby-backend 'lsp
+        ruby-backend 'lsp
         ruby-version-manager 'rbenv
         ruby-test-runner 'rspec
         ruby-highlight-debugger-keywords t)
