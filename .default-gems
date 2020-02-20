@@ -1,0 +1,9 @@
+bundler
+pry
+pry-doc
+gem-ctags
+solargraph
+ruby_parser
+rubocop
+seeing_is_believing
+rspec
