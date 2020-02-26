@@ -58,7 +58,7 @@ export FZF_BASE=/usr/local/bin/fzf
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode colored-man-pages colorize git kubectl gcloud docker brew osx asdf fzf httpie heroku redis-cli)
+plugins=(emacs vi-mode colored-man-pages colorize git kubectl gcloud docker brew osx asdf fzf httpie heroku redis-cli history-substring-search)
 # other potentially interesting plugins: ruby rails python golang npm tmux
 
 source $ZSH/oh-my-zsh.sh
@@ -141,8 +141,8 @@ setopt SHARE_HISTORY
 # The next line enables shell command completion for gcloud.
 # if [ -f '/home/will/Development/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/will/Development/google-cloud-sdk/completion.zsh.inc'; fi
 
-# set default editor to vim
-export VISUAL=vim
+# set default editor to emacsclient
+export VISUAL="emacsclient -c"
 export EDITOR="$VISUAL"
 
 # completions added by oh-my-zsh plugin?
@@ -177,6 +177,17 @@ compinit -C
 
 # ag completions
 . /usr/local/share/zsh/site-functions
+
+# alias for cat with syntax highlighting
+alias pcat='pygmentize -f terminal256 -O style=native -g'
+
+# use pygments & universal-ctags as backend for gtags
+export GTAGSLABEL=pygments
+
+# bind up/down keys to only show historical commands matching the typed substring
+# https://unix.stackexchange.com/questions/97843/how-can-i-search-history-with-text-already-entered-at-the-prompt-in-zsh
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
 
 # profiling zsh startup
 # zprof
