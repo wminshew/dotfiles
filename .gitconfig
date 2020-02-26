@@ -1,0 +1,8 @@
+# This is Git's per-user configuration file.
+[user]
+  name = William Minshew
+  email = wminshew@gmail.com
+[credential]
+	helper = osxkeychain
+[core]
+  excludesfile = ~/.gitignore

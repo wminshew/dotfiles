@@ -1,0 +1,13 @@
+# ignore vim buffers
+*.swp
+*.swo
+
+# ignore emacs buffers
+*#*
+
+# ignore tags
+tags
+TAGS
+GTAGS
+GRTAGS
+GPATH
