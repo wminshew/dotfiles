@@ -67,7 +67,8 @@ This function should only modify configuration layer settings."
         js2-include-node-externs t)
      (json :variables
         json-fmt-tool 'prettier)
-     lsp
+     (lsp :variables
+        lsp-solargraph-use-bundler t)
      markdown
      multiple-cursors
      org
