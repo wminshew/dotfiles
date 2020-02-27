@@ -511,6 +511,10 @@ before packages are loaded."
   (add-to-list 'default-frame-alist
                '(ns-appearance . light))
 
+  (defun ask-user-about-lock (file other-user)
+    "A value of t says to grab the lock on the file."
+    t)
+
   ;; set indent defaults
   (setq-default
     ;; js2-mode
