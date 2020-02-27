@@ -537,6 +537,10 @@ before packages are loaded."
   ;; set search mode to insenitive (default: smart)
   (setq case-fold-search nil)
   (setq evil-ex-search-case 'sensitive)
+
+  ;; speed up lsp performance
+  ;; https://github.com/emacs-lsp/lsp-mode#performance
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
