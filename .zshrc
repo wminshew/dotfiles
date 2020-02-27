@@ -122,7 +122,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 # init rbenv
 # eval "$(rbenv init -)"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # # export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
 # export PATH=/usr/local/cuda-9.0/bin:$PATH
@@ -182,6 +182,7 @@ compinit -C
 alias pcat='pygmentize -f terminal256 -O style=native -g'
 
 # use pygments & universal-ctags as backend for gtags
+export GTAGSCONF=/usr/local/share/gtags/gtags.conf
 export GTAGSLABEL=pygments
 
 # bind up/down keys to only show historical commands matching the typed substring
