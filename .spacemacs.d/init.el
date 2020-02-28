@@ -98,7 +98,10 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     exec-path-from-shell
+     )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -541,6 +544,22 @@ before packages are loaded."
   ;; speed up lsp performance
   ;; https://github.com/emacs-lsp/lsp-mode#performance
   (setq read-process-output-max (* 1024 1024)) ;; 1mb
+
+  (require 'exec-path-from-shell)
+  (when (memq window-system '(mac ns x))
+    (setq dired-use-ls-dired nil)
+
+    ;; (setq exec-path-from-shell-debug t)
+    (setq exec-path-from-shell-arguments '("-i"))
+    ;; (setq exec-path-from-shell-check-startup-files nil)
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-envs
+     '(
+       "EDITOR"
+       "GTAGSCONF"
+       "GTAGSLABEL"
+       "VISUAL"
+       )))
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
