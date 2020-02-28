@@ -15,7 +15,7 @@ export VISUAL="emacsclient -c"
 export EDITOR="$VISUAL"
 
 # asdf version manager
-# . /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/asdf.sh
 # . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

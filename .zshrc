@@ -31,7 +31,7 @@ alias startx="sudo systemctl isolate graphical.target"
 alias pcat='pygmentize -f terminal256 -O style=native -g'
 
 # asdf version manager
-. /usr/local/opt/asdf/asdf.sh
+# . /usr/local/opt/asdf/asdf.sh
 . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 
 # ag completions
