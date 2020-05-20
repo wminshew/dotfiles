@@ -12,7 +12,7 @@
 # HIST_STAMPS="mm/dd/yyyy"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export plugins=(emacs vi-mode colored-man-pages colorize git kubectl gcloud docker brew osx asdf fzf httpie heroku redis-cli history-substring-search)
+export plugins=(emacs vi-mode colored-man-pages colorize jsontools git kubectl gcloud docker brew osx asdf fzf httpie heroku redis-cli history-substring-search)
 # ruby rails python golang npm tmux
 . $ZSH/oh-my-zsh.sh
 
@@ -50,6 +50,9 @@ for dump in $ZSH_COMPDUMP(#qN.m1); do
 done
 unsetopt EXTENDEDGLOB
 compinit -C
+
+# use 'fd' to enter vi-cmd-mode
+bindkey 'fd' vi-cmd-mode
 
 # profiling zsh startup
 # zprof
