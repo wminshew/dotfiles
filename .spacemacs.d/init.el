@@ -39,38 +39,54 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      (auto-completion :variables
-        auto-completion-enable-snippets-in-popup t
-        ;; tab key to complete as much of common completion as possible
-        auto-completion-tab-key-behavior 'cycle
-        ;; automatic docstring display
-        auto-completion-enable-help-tooltip t
-        ;; enable the most frequent matches to show first
-        auto-completion-enable-sort-by-usage t)
+                      auto-completion-enable-snippets-in-popup t
+                      ;; tab key to complete as much of common completion as possible
+                      auto-completion-tab-key-behavior 'cycle
+                      ;; automatic docstring display
+                      auto-completion-enable-help-tooltip t
+                      ;; enable the most frequent matches to show first
+                      auto-completion-enable-sort-by-usage t)
      emacs-lisp
      emoji
      git
+     github
      (gtags :variables
-        gtags-enable-by-default t)
+            gtags-enable-by-default t)
      helm
      (html :variables
-        web-fmt-tool 'prettier)
+           web-fmt-tool 'prettier)
+     ;; browse buffers by major-mode or project
+     (ibuffer :variables
+              ibuffer-group-buffers-by 'projects)
      (javascript :variables
-        javascript-import-tool 'import-js
-        javascript-backend 'lsp
-        javascript-lsp-linter nil
-        ;; if using flow, js2-mode sometimes gets confused
-        js2-mode-show-strict-warnings nil
-        js2-mode-show-parse-errors nil
-        javascript-fmt-tool 'prettier
-        node-add-modules-path t
-        js2-include-node-externs t)
+                 javascript-import-tool 'import-js
+                 javascript-backend 'lsp
+                 javascript-lsp-linter nil
+                 ;; if using flow, js2-mode sometimes gets confused
+                 js2-mode-show-strict-warnings nil
+                 js2-mode-show-parse-errors nil
+                 javascript-fmt-tool 'prettier
+                 node-add-modules-path t
+                 js2-include-node-externs t)
      (json :variables
-        json-fmt-tool 'prettier)
+           json-fmt-tool 'prettier)
      (lsp :variables
-        lsp-solargraph-use-bundler t)
+          lsp-solargraph-use-bundler t)
      markdown
      multiple-cursors
-     org
+     (org :variables
+          org-enable-org-journal-support t
+          org-want-todo-bindings t
+          ;; org-enable-github-support t
+          ;; org-enable-bootstrap-support t
+          ;; org-enable-reveal-js-support t
+          ;; org-enable-hugo-support t
+          ;; org-enable-trello-support t
+          ;; org-enable-jira-support t
+          ;; org-enable-epub-support t
+          org-enable-sticky-header t
+          org-projectile-file "TODOs.org")
+     org-roam
      osx
      prettier
      (ranger :variables
@@ -80,22 +96,34 @@ This function should only modify configuration layer settings."
              ranger-max-preview-size 10)
      react
      (ruby :variables
-        ruby-enable-enh-ruby-mode	t
-        ruby-backend 'lsp ;; 'robe
-        ruby-version-manager 'rbenv
-        ruby-test-runner 'rspec
-        ruby-highlight-debugger-keywords t)
+           ruby-enable-enh-ruby-mode	t
+           ruby-backend 'lsp ;; 'robe
+           ruby-version-manager 'rbenv
+           ruby-test-runner 'rspec
+           ruby-highlight-debugger-keywords t)
      ruby-on-rails
      (shell :variables
-        shell-default-height 30
-        shell-default-position 'bottom
-        shell-enable-smart-eshell t)
+            shell-default-height 30
+            shell-default-position 'bottom
+            shell-enable-smart-eshell t)
      (spell-checking :variables
-        ispell-program-name "aspell"
-        ispell-dictionary "en_US")
+                     ispell-program-name "aspell"
+                     ispell-dictionary "en_US")
      spotify
+     (sql :variables
+          sql-capitalize-keywords t)
      syntax-checking
      treemacs
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-fmt-tool 'prettier
+                 typescript-linter 'eslint
+                 typescript-backend 'lsp
+                 typescript-lsp-linter 'nil
+                 node-add-modules-path t)
+     (version-control :variables
+                      version-control-diff-side 'left
+                      version-control-global-margin t)
      yaml
      )
 
@@ -115,7 +143,8 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(window-purpose)
+   ;; dotspacemacs-excluded-packages '()
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -284,7 +313,7 @@ It should only modify the values of Spacemacs settings."
    ;; and TAB or `C-m' and `RET'.
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
-   dotspacemacs-distinguish-gui-tab nil
+   dotspacemacs-distinguish-gui-tab t
 
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
@@ -304,7 +333,7 @@ It should only modify the values of Spacemacs settings."
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 1
+   dotspacemacs-large-file-size 1000
 
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
@@ -404,7 +433,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -497,6 +526,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq-default git-magit-status-fullscreen t)
   )
 
 (defun dotspacemacs/user-load ()
@@ -522,6 +552,11 @@ before packages are loaded."
   (add-to-list 'default-frame-alist
                '(ns-appearance . light))
 
+  (setq magit-log-section-commit-count 20)
+  (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
+  (setq paradox-github-token
+        (cadr(auth-source-user-and-password "api.github.com" "wminshew^paradox")))
+
   (defun ask-user-about-lock (file other-user)
     "A value of t says to grab the lock on the file."
     t)
@@ -546,7 +581,7 @@ before packages are loaded."
     (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
     )
 
-  ;; set search mode to insenitive (default: smart)
+  ;; set search mode to insensitive (default: smart)
   (setq case-fold-search nil)
   (setq evil-ex-search-case 'sensitive)
 
@@ -576,6 +611,92 @@ before packages are loaded."
   ;; add emoji support in macos
   (when (eq system-type 'darwin)
     (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
+
+  ;; set C-w to delete-word in helm
+  (with-eval-after-load 'helm
+    (define-key helm-map (kbd "C-w") 'evil-delete-backward-word))
+  ;; set C-w to delete-word in completion
+  (with-eval-after-load 'company
+    (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word))
+
+  ;; org config -- to avoid messing with emacs-vanilla org (wait for layer to load)
+  (with-eval-after-load 'org
+    (add-to-list 'org-modules 'org-protocol)
+    (add-to-list 'org-modules 'org-roam-protocol)
+    (require 'org-protocol)
+    (require 'org-roam-protocol)
+    (setq org-todo-keywords '((sequence "TODO(t)" "PROGRESS(p)" "WAITING(w)" "|" "DONE(d)" "DELEGATED(g)" "CANCELLED(c)")))
+    (setq org-highest-priority ?0)
+    (setq org-lowest-priority ?9)
+    (setq org-default-priority ?5)
+    (setq spaceline-org-clock-p t)
+    (setq org-directory "~/development/org")
+    (setq org-roam-directory (concat org-directory "/wiki"))
+    (setq org-default-notes-file (concat org-directory "/tasks.org"))
+    (setq org-agenda-files '("~/development/org/tasks.org"
+                             "~/development/org/emrys-capital.org"
+                             "~/development/org/emrys.org"
+                             "~/development/org/mighty.org"
+                             "~/development/org/habits.org"))
+    (setq org-agenda-custom-commands
+          '(("c" . "My Custom Agendas")
+            ("cu" "Unscheduled TODO"
+             ((todo ""
+                    ((org-agenda-overriding-header "\nUnscheduled TODO")
+                     (org-agenda-skip-function '(or (org-agenda-skip-entry-if 'scheduled)
+                                                    (org-agenda-skip-entry-if 'deadline))))))
+             nil
+             nil)))
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (org-agenda-files :maxlevel . 9)))
+    (setq org-refile-use-outline-path 'file)
+    (setq org-outline-path-complete-in-steps nil)
+    (setq org-refile-allow-creating-parent-nodes 'confirm)
+    (setq org-journal-dir (concat org-directory "/journal"))
+    (setq org-journal-file-format "%Y-%m-%d")
+    (setq org-capture-templates '(
+                                  ("t" "Todo" entry (file+headline org-default-notes-file "tasks")
+                                   "* TODO %?\n  %i\n  %a")
+                                  ("p" "Protocol" entry (file+headline org-default-notes-file "tasks")
+                                   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+                                  ("L" "Protocol Link" entry (file+headline org-default-notes-file "tasks")
+                                   "* %? [[%:link][%:description]] \nCaptured On: %U")))
+    (setq org-protocol-default-template-key "p")
+    (setq org-roam-link-title-format "[[%s]]")
+    (setq org-roam-completion-system 'helm)
+    (setq org-roam-capture-templates '(
+                                       ("d" "default" plain (function org-roam--capture-get-point)
+                                        "%?"
+                                        :file-name "${slug}"
+                                        :head "#+TITLE: ${slug}
+#+ROAM_KEY: ${slug}"
+                                        :unnarrowed t)))
+    (setq org-roam-capture-ref-templates '(
+                                           ("r" "ref" plain (function org-roam--capture-get-point)
+                                            "%?"
+                                            :file-name "websites/${slug}"
+                                            :head "#+TITLE: ${title}
+#+ROAM_KEY: ${ref}
+- source :: ${ref}"
+                                            :unnarrowed t)))
+    (setq org-agenda-span 'day)
+    (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+    (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+    (setq org-agenda-skip-deadline-if-done t)
+    (setq org-agenda-window-setup 'current-window)
+    (setq org-agenda-start-with-log-mode t)
+    (setq org-habit-graph-column 80)
+    (setq org-habit-show-habits-only-for-today t)
+    (add-hook 'org-agenda-finalize-hook
+              (lambda () (remove-text-properties
+                          (point-min) (point-max) '(mouse-face t))))
+    (with-eval-after-load 'org-agenda
+      (require 'org-projectile)
+      (mapcar (lambda (file)
+                (when (file-exists-p file)
+                  (push file org-agenda-files)))
+              (org-projectile-todo-files))))
+
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -593,7 +714,8 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(helm-completion-style 'emacs)
  '(package-selected-packages
-   '(ranger flyspell-correct-helm flyspell-correct auto-dictionary xkcd spotify helm-spotify-plus multi xterm-color vterm terminal-here shell-pop multi-term eshell-z eshell-prompt-extras esh-help helm-gtags ggtags enh-ruby-mode dap-mode bui company-statistics company-quickhelp projectile-rails inflections feature-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data add-node-modules-path yapfify yaml-mode utop tuareg caml seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements ocp-indent ob-elixir mvn minitest meghanada maven-test-mode lsp-python-ms lsp-java live-py-mode importmagic epc ctable concurrent deferred helm-pydoc groovy-mode groovy-imports pcache gradle-mode git-gutter-fringe+ fringe-helper git-gutter+ flycheck-ocaml merlin flycheck-mix flycheck-credo emojify emoji-cheat-sheet-plus dune cython-mode company-emoji company-anaconda chruby bundler inf-ruby browse-at-remote blacken auto-complete-rst anaconda-mode pythonic alchemist elixir-mode yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-tern company auto-yasnippet ac-ispell auto-complete evil-mc ws-butler writeroom-mode visual-fill-column winum web-beautify volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-persp treemacs-magit treemacs-evil treemacs pfuture toc-org tern symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline smeargle rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters prettier-js popwin persp-mode password-generator paradox spinner overseer osx-trash osx-dictionary osx-clipboard orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-bullets org-brain org-ql peg ov org-super-agenda dash-functional ts ht open-junk-file nodejs-repl nameless move-text mmm-mode markdown-toc markdown-mode magit-svn magit-section magit-gitflow magit-popup macrostep lorem-ipsum livid-mode skewer-mode simple-httpd link-hint launchctl json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-ls-git helm-gitignore request helm-git-grep helm-flx helm-descbinds helm-ag google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck-package package-lint flycheck pkg-info epl let-alist flycheck-elsa flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit magit git-commit with-editor transient evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump f dash s devdocs column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async)))
+   '(org-roam github-search github-clone gist gh marshal logito forge ghub closql emacsql-sqlite emacsql treepy org-sticky-header org-journal tide typescript-mode lsp-mode sqlup-mode sql-indent ibuffer-projectile ranger flyspell-correct-helm flyspell-correct auto-dictionary xkcd spotify helm-spotify-plus multi xterm-color vterm terminal-here shell-pop multi-term eshell-z eshell-prompt-extras esh-help helm-gtags ggtags enh-ruby-mode dap-mode bui company-statistics company-quickhelp projectile-rails inflections feature-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data add-node-modules-path yapfify yaml-mode utop tuareg caml seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements ocp-indent ob-elixir mvn minitest meghanada maven-test-mode lsp-python-ms lsp-java live-py-mode importmagic epc ctable concurrent deferred helm-pydoc groovy-mode groovy-imports pcache gradle-mode git-gutter-fringe+ fringe-helper git-gutter+ flycheck-ocaml merlin flycheck-mix flycheck-credo emojify emoji-cheat-sheet-plus dune cython-mode company-emoji company-anaconda chruby bundler inf-ruby browse-at-remote blacken auto-complete-rst anaconda-mode pythonic alchemist elixir-mode yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-tern company auto-yasnippet ac-ispell auto-complete evil-mc ws-butler writeroom-mode visual-fill-column winum web-beautify volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-persp treemacs-magit treemacs-evil treemacs pfuture toc-org tern symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline smeargle rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters prettier-js popwin persp-mode password-generator paradox spinner overseer osx-trash osx-dictionary osx-clipboard orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-bullets org-brain org-ql peg ov org-super-agenda dash-functional ts ht open-junk-file nodejs-repl nameless move-text mmm-mode markdown-toc markdown-mode magit-svn magit-section magit-gitflow magit-popup macrostep lorem-ipsum livid-mode skewer-mode simple-httpd link-hint launchctl json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-ls-git helm-gitignore request helm-git-grep helm-flx helm-descbinds helm-ag google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck-package package-lint flycheck pkg-info epl let-alist flycheck-elsa flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit magit git-commit with-editor transient evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump f dash s devdocs column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))
+ '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
