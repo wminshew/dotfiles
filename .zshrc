@@ -39,6 +39,7 @@ alias pcat='pygmentize -f terminal256 -O style=native -g'
 
 # Perform compinit only once a day.
 autoload -Uz compinit
+autoload -Uz bashcompinit
 
 setopt EXTENDEDGLOB
 for dump in $ZSH_COMPDUMP(#qN.m1); do
@@ -50,9 +51,19 @@ for dump in $ZSH_COMPDUMP(#qN.m1); do
 done
 unsetopt EXTENDEDGLOB
 compinit -C
+bashcompinit
+
+# elm completions
+. ~/.zsh/elm-sh-completion/elm-completion.sh
 
 # use 'fd' to enter vi-cmd-mode
 bindkey 'fd' vi-cmd-mode
+
+# enable C-x-e to edit command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
 
 # profiling zsh startup
 # zprof

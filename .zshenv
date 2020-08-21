@@ -23,9 +23,10 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export fpath=(/usr/local/share/zsh-completions $fpath)
 
 # use pygments & universal-ctags as backend for gtags
-export GTAGSCONF=/usr/local/share/gtags/gtags.conf
 export GTAGSLABEL=pygments
 
 # Speeds up load time
 export DISABLE_UPDATE_PROMPT=true
 
+# hide instance variables for rspec pry-state
+export HIDE_INSTANCE_VARIABLES=@fixture_connections
