@@ -59,6 +59,8 @@ This function should only modify configuration layer settings."
      (deft :variables deft-zetteldeft nil)
      (elfeed :variables
              rmh-elfeed-org-files (list "~/development/org/elfeed.org"))
+     (elixir :variables
+             elixir-backend 'alchemist)
      (elm :variables
           elm-sort-imports-on-save t
           elm-format-on-save t)
@@ -72,8 +74,7 @@ This function should only modify configuration layer settings."
      graphviz
      (gtags :variables
             gtags-enable-by-default t)
-     ;; (helm :variables
-     ;;       helm-follow-mode-persistent t)
+     (haskell :variables haskell-completion-backend 'lsp)
      helm
      (html :variables
            web-fmt-tool 'prettier)
@@ -609,6 +610,15 @@ before packages are loaded."
   ;; keeps s-expressions balanced when possible in lisp modes
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
+  ;; limit print length for eval & debug
+  (setq eval-expression-print-length 24)
+  (setq print-length 24)
+  (setq cider-print-options '(("length" 24) ("right-margin" 80)))
+  ;; (add-to-list 'cider-repl-init-code "(set! *print-length* 24)")
+  ;; (set! *print-length* 24)
+  ;; (#'clojure.core/load-data-readers)
+  ;; (set! *data-readers* (.getRawRoot #'*data-readers*))
+
   (add-to-list 'default-frame-alist
                '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist
@@ -683,12 +693,12 @@ before packages are loaded."
 
   ;; org config -- to avoid messing with emacs-vanilla org (wait for layer to load)
   (with-eval-after-load 'org
-    (require 'org-protocol)
-    (require 'org-roam-protocol)
-    (require 'netrc)
     (add-to-list 'org-modules 'org-habit t)
     (add-to-list 'org-modules 'org-protocol t)
     (add-to-list 'org-modules 'org-roam-protocol t)
+    (require 'org-protocol)
+    (require 'org-roam-protocol)
+    (require 'netrc)
     (setq org-todo-keywords '((sequence "TODO(t)" "PROGRESS(p)" "WAITING(w)"
                                         "|" "DONE(d)" "DELEGATED(g)" "CANCELLED(c)")))
     (setq org-highest-priority ?0)
@@ -802,11 +812,30 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#d2ceda" "#f2241f" "#67b11d" "#b1951d" "#3a81c3" "#a31db1" "#21b8c7" "#655370"])
  '(evil-want-Y-yank-to-eol nil)
  '(helm-completion-style 'emacs)
+ '(hl-todo-keyword-faces
+   '(("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#3a81c3")
+     ("OKAY" . "#3a81c3")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#42ae2c")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(doom-modeline shrink-path indium json-process-client company-box import-js grizzl stickyfunc-enhance srefactor zetteldeft deft helm-dash dash-docs dash-at-point org-gcal persist request-deferred calfw elfeed-org elfeed-goodies ace-jump-mode noflet elfeed org-roam github-search github-clone gist gh marshal logito forge ghub closql emacsql-sqlite emacsql treepy org-sticky-header org-journal tide typescript-mode lsp-mode sqlup-mode sql-indent ibuffer-projectile ranger flyspell-correct-helm flyspell-correct auto-dictionary xkcd spotify helm-spotify-plus multi xterm-color vterm terminal-here shell-pop multi-term eshell-z eshell-prompt-extras esh-help helm-gtags ggtags enh-ruby-mode dap-mode bui company-statistics company-quickhelp projectile-rails inflections feature-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data add-node-modules-path yapfify yaml-mode utop tuareg caml seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements ocp-indent ob-elixir mvn minitest meghanada maven-test-mode lsp-python-ms lsp-java live-py-mode importmagic epc ctable concurrent deferred helm-pydoc groovy-mode groovy-imports pcache gradle-mode git-gutter-fringe+ fringe-helper git-gutter+ flycheck-ocaml merlin flycheck-mix flycheck-credo emojify emoji-cheat-sheet-plus dune cython-mode company-emoji company-anaconda chruby bundler inf-ruby browse-at-remote blacken auto-complete-rst anaconda-mode pythonic alchemist elixir-mode yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-tern company auto-yasnippet ac-ispell auto-complete evil-mc ws-butler writeroom-mode visual-fill-column winum web-beautify volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-persp treemacs-magit treemacs-evil treemacs pfuture toc-org tern symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline smeargle rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters prettier-js popwin persp-mode password-generator paradox spinner overseer osx-trash osx-dictionary osx-clipboard orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-bullets org-brain org-ql peg ov org-super-agenda dash-functional ts ht open-junk-file nodejs-repl nameless move-text mmm-mode markdown-toc markdown-mode magit-svn magit-section magit-gitflow magit-popup macrostep lorem-ipsum livid-mode skewer-mode simple-httpd link-hint launchctl json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-ls-git helm-gitignore request helm-git-grep helm-flx helm-descbinds helm-ag google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck-package package-lint flycheck pkg-info epl let-alist flycheck-elsa flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit magit git-commit with-editor transient evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump f dash s devdocs column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))
+   '(lsp-haskell intero hlint-refactor hindent helm-hoogle haskell-snippets flycheck-haskell dante lcr company-ghci company-ghc ghc haskell-mode company-cabal cmm-mode attrap doom-modeline shrink-path indium json-process-client company-box import-js grizzl stickyfunc-enhance srefactor zetteldeft deft helm-dash dash-docs dash-at-point org-gcal persist request-deferred calfw elfeed-org elfeed-goodies ace-jump-mode noflet elfeed org-roam github-search github-clone gist gh marshal logito forge ghub closql emacsql-sqlite emacsql treepy org-sticky-header org-journal tide typescript-mode lsp-mode sqlup-mode sql-indent ibuffer-projectile ranger flyspell-correct-helm flyspell-correct auto-dictionary xkcd spotify helm-spotify-plus multi xterm-color vterm terminal-here shell-pop multi-term eshell-z eshell-prompt-extras esh-help helm-gtags ggtags enh-ruby-mode dap-mode bui company-statistics company-quickhelp projectile-rails inflections feature-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data add-node-modules-path yapfify yaml-mode utop tuareg caml seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements ocp-indent ob-elixir mvn minitest meghanada maven-test-mode lsp-python-ms lsp-java live-py-mode importmagic epc ctable concurrent deferred helm-pydoc groovy-mode groovy-imports pcache gradle-mode git-gutter-fringe+ fringe-helper git-gutter+ flycheck-ocaml merlin flycheck-mix flycheck-credo emojify emoji-cheat-sheet-plus dune cython-mode company-emoji company-anaconda chruby bundler inf-ruby browse-at-remote blacken auto-complete-rst anaconda-mode pythonic alchemist elixir-mode yasnippet-snippets helm-company helm-c-yasnippet fuzzy company-tern company auto-yasnippet ac-ispell auto-complete evil-mc ws-butler writeroom-mode visual-fill-column winum web-beautify volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-persp treemacs-magit treemacs-evil treemacs pfuture toc-org tern symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline smeargle rjsx-mode reveal-in-osx-finder restart-emacs rainbow-delimiters prettier-js popwin persp-mode password-generator paradox spinner overseer osx-trash osx-dictionary osx-clipboard orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-bullets org-brain org-ql peg ov org-super-agenda dash-functional ts ht open-junk-file nodejs-repl nameless move-text mmm-mode markdown-toc markdown-mode magit-svn magit-section magit-gitflow magit-popup macrostep lorem-ipsum livid-mode skewer-mode simple-httpd link-hint launchctl json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-ls-git helm-gitignore request helm-git-grep helm-flx helm-descbinds helm-ag google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck-package package-lint flycheck pkg-info epl let-alist flycheck-elsa flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit magit git-commit with-editor transient evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump f dash s devdocs column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))
  '(paradox-github-token t t)
+ '(pdf-view-midnight-colors '("#655370" . "#fbf8ef"))
  '(safe-local-variable-values
    '((projectile-indexing-method . hybrid)
      (typescript-backend . tide)
@@ -824,4 +853,5 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ))
+ )
+)
