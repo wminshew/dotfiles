@@ -10,6 +10,9 @@ export FZF_BASE=/usr/local/bin/fzf
 # Homebrew
 export PATH="/usr/local/bin:$PATH"
 
+# hie / stack / haskell
+export PATH="$PATH:/Users/wminshew/.asdf/installs/haskell/8.10.2/bin"
+
 # set default editor to emacsclient
 export VISUAL="emacsclient -c"
 export EDITOR="$VISUAL"

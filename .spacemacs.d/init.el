@@ -74,7 +74,9 @@ This function should only modify configuration layer settings."
      graphviz
      (gtags :variables
             gtags-enable-by-default t)
-     (haskell :variables haskell-completion-backend 'lsp)
+     (haskell :variables
+              haskell-completion-backend 'lsp
+              lsp-haskell-process-path-hie "haskell-language-server-wrapper")
      helm
      (html :variables
            web-fmt-tool 'prettier)
@@ -101,6 +103,7 @@ This function should only modify configuration layer settings."
           lsp-solargraph-use-bundler t)
      markdown
      multiple-cursors
+     ocaml
      (org :variables
           org-enable-org-journal-support t
           org-want-todo-bindings t
@@ -136,6 +139,8 @@ This function should only modify configuration layer settings."
            ruby-test-runner 'rspec
            ruby-highlight-debugger-keywords t)
      ruby-on-rails
+     (rust :variables
+           rust-format-on-save t)
      semantic
      (shell :variables
             shell-default-height 30
@@ -625,6 +630,13 @@ before packages are loaded."
                '(ns-appearance . light))
 
   (setq magit-log-section-commit-count 20)
+  (setq magit-process-finish-apply-ansi-colors t)
+  (when (eq system-type 'darwin)
+    ;; Lefthook outputs an extra carriage returns on Darwin.
+    (defun me/magit--darwin-process-filter (orig-fun proc string)
+      (funcall orig-fun proc (replace-regexp-in-string "\r\n" "\n" string)))
+    (advice-add 'magit-process-filter :around #'me/magit--darwin-process-filter))
+
   (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
   (setq paradox-github-token (cadr (auth-source-user-and-password "api.github.com"
                                                                   "wminshew^paradox")))
@@ -714,7 +726,9 @@ before packages are loaded."
                              "~/development/org/emrys-capital.org"
                              "~/development/org/emrys.org"
                              "~/development/org/mighty.org"
-                             "~/development/org/habits.org"))
+                             "~/development/org/habits.org"
+                             "~/development/org/gcal.org"
+                             "~/development/org/mighty-gcal.org"))
     (setq org-agenda-custom-commands
           '(("c" . "My Custom Agendas")
             ("cu" "Unscheduled TODO"
@@ -783,11 +797,9 @@ before packages are loaded."
         (when hostentry
           (netrc-get hostentry "password"))))
     (setq org-gcal-client-id "912804697644-uce1lkl6a1qmucc96qeolm8v8kgmt4e0.apps.googleusercontent.com"
-          org-gcal-client-secret
-          (get-authinfo "gcal.api" "9999")
-          org-gcal-file-alist
-          '(("wminshew@gmail.com" . "~/development/gcal.org")
-            ("will@mighty.co" . "~/development/mighty-gcal.org")))
+          org-gcal-client-secret (get-authinfo "gcal.api" "9999")
+          org-gcal-file-alist '(("wminshew@gmail.com" . "~/development/org/gcal.org")
+                                ("will@mighty.co" . "~/development/org/mighty-gcal.org")))
     (add-hook 'org-agenda-finalize-hook
               (lambda ()
                 (remove-text-properties (point-min)

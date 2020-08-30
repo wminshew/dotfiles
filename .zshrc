@@ -67,3 +67,6 @@ bindkey '^x^e' edit-command-line
 
 # profiling zsh startup
 # zprof
+
+# opam configuration
+test -r /Users/wminshew/.opam/opam-init/init.zsh && . /Users/wminshew/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
