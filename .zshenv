@@ -14,12 +14,14 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:/Users/wminshew/.asdf/installs/haskell/8.10.2/bin"
 
 # set default editor to emacsclient
-export VISUAL="emacsclient -c"
+# export VISUAL="emacsclient -c"
+export VISUAL="vim"
 export EDITOR="$VISUAL"
+# export EDITOR="vim"
 
 # asdf version manager
-. /usr/local/opt/asdf/asdf.sh
-# . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+unset ASDF_DIR
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
@@ -33,3 +35,6 @@ export DISABLE_UPDATE_PROMPT=true
 
 # hide instance variables for rspec pry-state
 export HIDE_INSTANCE_VARIABLES=@fixture_connections
+
+# foundry
+export PATH="$PATH:/Users/wminshew/.foundry/bin"

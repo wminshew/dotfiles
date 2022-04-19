@@ -12,7 +12,7 @@
 # HIST_STAMPS="mm/dd/yyyy"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export plugins=(emacs vi-mode colored-man-pages colorize jsontools git kubectl gcloud docker brew osx asdf fzf httpie heroku redis-cli history-substring-search)
+export plugins=(emacs vi-mode colored-man-pages colorize jsontools git kubectl gcloud docker brew macos asdf fzf httpie heroku redis-cli history-substring-search direnv)
 # ruby rails python golang npm tmux
 . $ZSH/oh-my-zsh.sh
 
@@ -27,11 +27,11 @@ setopt SHARE_HISTORY
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
+alias find="fd"
 alias startx="sudo systemctl isolate graphical.target"
 alias pcat='pygmentize -f terminal256 -O style=native -g'
 
 # asdf version manager
-# . /usr/local/opt/asdf/asdf.sh
 . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 
 # ag completions
@@ -70,3 +70,11 @@ bindkey '^x^e' edit-command-line
 
 # opam configuration
 test -r /Users/wminshew/.opam/opam-init/init.zsh && . /Users/wminshew/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# increase open file limit
+# ulimit -n 1024
+ulimit -S -n 4096
+
+forge completions zsh > $HOME/.oh-my-zsh/completions/_forge
+cast completions zsh > $HOME/.oh-my-zsh/completions/_cast
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"

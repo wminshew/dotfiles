@@ -5,6 +5,9 @@
 # ignore emacs buffers
 *#*
 
+# ignore emacs local vars
+.dir-locals.el
+
 # ignore tags
 tags
 TAGS
