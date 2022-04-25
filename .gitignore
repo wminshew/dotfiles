@@ -1,3 +1,6 @@
+# ignore macos metadata
+*.DS_Store
+
 # ignore vim buffers
 *.swp
 *.swo
@@ -14,3 +17,6 @@ TAGS
 GTAGS
 GRTAGS
 GPATH
+
+# ignore ts server / logs
+.log
