@@ -27,6 +27,7 @@ setopt SHARE_HISTORY
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
+alias vim="nvim"
 alias find="fd"
 alias startx="sudo systemctl isolate graphical.target"
 alias pcat='pygmentize -f terminal256 -O style=native -g'

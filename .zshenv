@@ -13,11 +13,11 @@ export PATH="/usr/local/bin:$PATH"
 # hie / stack / haskell
 export PATH="$PATH:/Users/wminshew/.asdf/installs/haskell/8.10.2/bin"
 
-# set default editor to emacsclient
+# set default editor
 # export VISUAL="emacsclient -c"
+# export VISUAL="nvim"
 export VISUAL="vim"
 export EDITOR="$VISUAL"
-# export EDITOR="vim"
 
 # asdf version manager
 unset ASDF_DIR
@@ -36,5 +36,5 @@ export DISABLE_UPDATE_PROMPT=true
 # hide instance variables for rspec pry-state
 export HIDE_INSTANCE_VARIABLES=@fixture_connections
 
-# foundry
-export PATH="$PATH:/Users/wminshew/.foundry/bin"
+# foundryup
+# export PATH="$PATH:/Users/wminshew/.foundry/bin"
