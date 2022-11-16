@@ -76,6 +76,12 @@ test -r /Users/wminshew/.opam/opam-init/init.zsh && . /Users/wminshew/.opam/opam
 # ulimit -n 1024
 ulimit -S -n 4096
 
+. "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+. "$HOME/.cargo/env"
+
+rustup completions zsh > $HOME/.oh-my-zsh/completions/_rustup
+rustup completions zsh cargo > $HOME/.oh-my-zsh/completions/_cargo
+
 forge completions zsh > $HOME/.oh-my-zsh/completions/_forge
 cast completions zsh > $HOME/.oh-my-zsh/completions/_cast
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+

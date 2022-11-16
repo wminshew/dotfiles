@@ -37,4 +37,8 @@ export DISABLE_UPDATE_PROMPT=true
 export HIDE_INSTANCE_VARIABLES=@fixture_connections
 
 # foundryup
-# export PATH="$PATH:/Users/wminshew/.foundry/bin"
+export PATH="$PATH:/Users/wminshew/.foundry/bin"
+
+# yarn global
+export PATH="$PATH:$(yarn global bin)"
+
