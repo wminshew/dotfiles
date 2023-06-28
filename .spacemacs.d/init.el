@@ -209,6 +209,10 @@ This function should only modify configuration layer settings."
      dotspacemacs-additional-packages
    '(
      exec-path-from-shell
+     (copilot :location (recipe
+                         :fetcher github
+                         :repo "zerolfx/copilot.el"
+                         :files ("*.el" "dist")))
      )
 
    ;; A list of packages that cannot be updated.
@@ -622,6 +626,18 @@ before packages are loaded."
  '(flycheck-command-wrapper-function . (lambda (command)
                                                        (append '("bundle" "exec")
                                                                command))))
+
+  ;; setup copilot
+  (with-eval-after-load 'company
+    ;; disable inline previews
+    (delq 'company-preview-if-just-one-frontend company-frontends))
+  (with-eval-after-load 'copilot
+    (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+    (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+    (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
+    (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
+  (add-hook 'prog-mode-hook 'copilot-mode)
+
 
   ;; toggle indent guide globally on start
   (spacemacs/toggle-indent-guide-globally-on)
