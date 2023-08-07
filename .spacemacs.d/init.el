@@ -44,43 +44,42 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-help-tooltip t
                       auto-completion-use-company-box t
                       auto-completion-enable-sort-by-usage t)
-     (clojure :variables
-              clojure-toplevel-inside-comment-form t
-              clojure-enable-linters '(clj-kondo joker)
-              clojure-enable-sayid t
-              cider-overlays-use-font-lock t
-              cider-print-options '(("length" 24) ("level" 10))
-              ;; '((\"length\" 50) (\"right-margin\" 70))
-              ;; cider-preferred-build-tool 'clojure-cli
-              clojure-enable-clj-refactor t)
-     command-log
-     colors
+     ;; (clojure :variables
+     ;;          clojure-toplevel-inside-comment-form t
+     ;;          clojure-enable-linters '(clj-kondo joker)
+     ;;          clojure-enable-sayid t
+     ;;          cider-overlays-use-font-lock t
+     ;;          cider-print-options '(("length" 24) ("level" 10))
+     ;;          ;; '((\"length\" 50) (\"right-margin\" 70))
+     ;;          ;; cider-preferred-build-tool 'clojure-cli
+     ;;          clojure-enable-clj-refactor t)
+     ;; command-log
+     compleseus
+     ;; colors
      csv
      ;; (dap :variables dap-enable-mouse-support	nil)
-     dash
-     (deft :variables deft-zetteldeft nil)
-     (elfeed :variables
-             rmh-elfeed-org-files (list "~/development/org/elfeed.org"))
-     (elixir :variables
-             elixir-backend 'alchemist)
-     (elm :variables
-          elm-sort-imports-on-save t
-          elm-format-on-save t)
+     ;; dash
+     ;; (deft :variables deft-zetteldeft nil)
+     ;; (elfeed :variables
+     ;;         rmh-elfeed-org-files (list "~/development/org/elfeed.org"))
+     ;; (elixir :variables
+     ;;         elixir-backend 'alchemist)
+     ;; (elm :variables
+     ;;      elm-sort-imports-on-save t
+     ;;      elm-format-on-save t)
      emacs-lisp
      emoji
      (git :variables
           git-magit-status-fullscreen t
           magit-diff-refine-hunk 'all)
-     github
      ;; google-calendar
      graphql
-     graphviz
+     ;; graphviz
      (gtags :variables
             gtags-enable-by-default nil)
-     (haskell :variables
-              haskell-completion-backend 'lsp
-              lsp-haskell-process-path-hie "haskell-language-server-wrapper")
-     helm
+     ;; (haskell :variables
+     ;;          haskell-completion-backend 'lsp
+     ;;          lsp-haskell-process-path-hie "haskell-language-server-wrapper")
      helpful
      (html :variables
            web-fmt-tool 'prettier)
@@ -88,11 +87,10 @@ This function should only modify configuration layer settings."
      (ibuffer :variables
               ibuffer-group-buffers-by 'projects)
      import-js
-     ;; indium
      (javascript :variables
                  javascript-repl 'indium
                  javascript-import-tool 'import-js
-                 javascript-backend 'tide
+                 javascript-backend 'lsp
                  ;; javascript-lsp-linter nil
                  ;; if using flow, js2-mode sometimes gets confused
                  ;; js2-mode-show-strict-warnings nil
@@ -100,20 +98,33 @@ This function should only modify configuration layer settings."
                  javascript-fmt-tool 'prettier
                  node-add-modules-path t
                  js2-include-node-externs t)
-     julia
+     ;; julia
      (json :variables
            json-fmt-tool 'prettier)
      (lsp :variables
+          lsp-inlay-hints-mode t
+          lsp-inlay-hint-enable t
+          lsp-ui-sideline-show-code-actions t
           lsp-rust-server 'rust-analyzer
           cargo-process-reload-on-modify t
-          lsp-solargraph-use-bundler t)
+          lsp-rust-analyzer-cargo-watch-command "clippy"
+          lsp-eldoc-render-all t
+          lsp-rust-analyzer-proc-macro-enable t
+          lsp-rust-analyzer-experimental-proc-attr-macros t
+          lsp-rust-analyzer-inlay-hints-mode t
+          lsp-rust-analyzer-max-inlay-hint-length '20
+          lsp-rust-analyzer-server-display-inlay-hints t
+          lsp-rust-analyzer-display-chaining-hints t
+          lsp-rust-analyzer-display-parameter-hints t
+          lsp-rust-analyzer-display-closure-return-type-hints t)
      markdown
-     multiple-cursors
-     ocaml
+     ;; multiple-cursors
+     ;; ocaml
      (org :variables
           org-enable-org-journal-support t
           org-want-todo-bindings t
           org-enable-roam-support t
+          org-enable-roam-protocol t
           ;; org-enable-github-support t
           ;; org-enable-bootstrap-support t
           ;; org-enable-reveal-js-support t
@@ -123,29 +134,26 @@ This function should only modify configuration layer settings."
           ;; org-enable-epub-support t
           org-enable-sticky-header t
           org-projectile-file "TODOs.org")
-     ;; org-roam
      osx
      prettier
-     (python :variables
-             ;; python-backend 'lsp
-             python-backend 'anaconda
-             python-formatter 'yapf
-             python-format-on-save t
-             python-sort-imports-on-save t)
+     ;; (python :variables
+     ;;         python-backend 'lsp
+     ;;         python-formatter 'yapf
+     ;;         python-format-on-save t
+     ;;         python-sort-imports-on-save t)
      (ranger :variables
              ranger-show-preview t
              ranger-cleanup-on-disable t
              ranger-show-hidden t
              ranger-max-preview-size 10)
      react
-     (ruby :variables
-           ruby-enable-enh-ruby-mode	t
-           ruby-backend 'lsp
-           ;; ruby-backend 'robe
-           ruby-version-manager 'rbenv
-           ruby-test-runner 'rspec
-           ruby-highlight-debugger-keywords t)
-     ruby-on-rails
+     ;; (ruby :variables
+     ;;       ruby-enable-enh-ruby-mode	t
+     ;;       ruby-backend 'lsp
+     ;;       ruby-version-manager 'rbenv
+     ;;       ruby-test-runner 'rspec
+     ;;       ruby-highlight-debugger-keywords t)
+     ;; ruby-on-rails
      (rust :variables
            rust-format-on-save t)
      semantic
@@ -172,24 +180,21 @@ This function should only modify configuration layer settings."
      (spell-checking :variables
                      ispell-program-name "aspell"
                      ispell-dictionary "en_US")
-     spotify
+     ;; spotify
      (sql :variables
           sql-capitalize-keywords t)
      (syntax-checking  :variables
                        syntax-checking-enable-tooltips nil
                        syntax-checking-use-original-bitmaps t)
-     themes-megapack
-     theming
-     tide
-     (treemacs :variables
-               treemacs-indentation 1
-               treemacs-use-filewatch-mode t
-               treemacs-use-follow-mode t)
+     ;; theming
+     ;; (treemacs :variables
+     ;;           treemacs-indentation 1
+     ;;           treemacs-use-filewatch-mode t
+     ;;           treemacs-use-follow-mode t)
      (typescript :variables
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
-                 ;; typescript-backend 'tide
                  typescript-backend 'lsp
                  typescript-lsp-linter 'nil
                  node-add-modules-path t)
@@ -339,8 +344,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-light
-                         spacemacs-dark)
+   dotspacemacs-themes '(spacemacs-dark
+                         spacemacs-light)
                          ;; badwolf)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -511,7 +516,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers 'nil
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -638,7 +643,6 @@ before packages are loaded."
     (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
   (add-hook 'prog-mode-hook 'copilot-mode)
 
-
   ;; toggle indent guide globally on start
   (spacemacs/toggle-indent-guide-globally-on)
   ;; toggle indent highlight on buffer start
@@ -646,18 +650,6 @@ before packages are loaded."
 
   ;; keeps s-expressions balanced when possible in lisp modes
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
-
-  ;; limit print length for eval & debug
-  ;; (setq eval-expression-print-length 24)
-  ;; (setq print-length 24)
-  ;; (setq cider-print-options '(("length" 24) ("right-margin" 80)))
-  ;; (add-to-list 'cider-repl-init-code "(set! *print-length* 24)")
-  ;; (add-to-list 'cider-repl-init-code "(set! *print-level* 10)")
-  ;; (add-to-list 'cider-repl-init-code "(#'clojure.core/load-data-readers)")
-  ;; (add-to-list 'cider-repl-init-code "(set! *data-readers* (.getRawRoot #'*data-readers*))")
-  ;; (set! *print-length* 24)
-  ;; (#'clojure.core/load-data-readers)
-  ;; (set! *data-readers* (.getRawRoot #'*data-readers*))
 
   (add-to-list 'default-frame-alist
                '(ns-transparent-titlebar . t))
@@ -694,9 +686,6 @@ before packages are loaded."
     web-mode-attr-indent-offset 2
     javascript-fmt-on-save t)
 
-  ;; turn off elm-indent until figure out broken helm-interaction
-  (add-hook 'elm-mode-hook #'turn-off-elm-indent)
-
   (with-eval-after-load 'web-mode
     (add-to-list 'web-mode-indentation-params
                  '("lineup-args" . nil))
@@ -716,13 +705,19 @@ before packages are loaded."
   (require 'exec-path-from-shell)
   (when (memq window-system
               '(mac ns x))
-    (setq dired-use-ls-dired nil)
+    ;; (setq dired-use-ls-dired nil)
 
     ;; (setq exec-path-from-shell-debug t)
-    (setq exec-path-from-shell-arguments '("-i"))
     ;; (setq exec-path-from-shell-check-startup-files nil)
+    ;; (setq exec-path-from-shell-arguments '("-i"))
+    ;; TODO: still slow af, some suggestions to speed up via
+    ;; https://github.com/purcell/exec-path-from-shell
+    ;; maybe just use .spacemacs.env ,,
+    (setq exec-path-from-shell-arguments nil)
+    (dolist (var '("EDITOR" "GTAGSCONF" "GTAGSLABEL" "VISUAL" "ASDF_DIR"))
+      (add-to-list 'exec-path-from-shell-variables var))
     (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-envs '("EDITOR" "GTAGSCONF" "GTAGSLABEL" "VISUAL" "ASDF_DIR")))
+    )
 
   ;; set shell external terminal to iTerm
   (setq terminal-here-terminal-command (list "/Applications/iTerm.app/Contents/MacOS/iTerm2"))
@@ -732,25 +727,22 @@ before packages are loaded."
     (set-fontset-font t 'unicode "Apple Color Emoji"
                       nil 'prepend))
 
-  ;; set C-w to delete-word in helm
-  (with-eval-after-load 'helm
-    (define-key helm-map (kbd "C-w") 'evil-delete-backward-word))
   ;; set C-w to delete-word in completion
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word))
 
-  (setq deft-directory "~/development/org/wiki")
+  ;; (setq deft-directory "~/development/org/wiki")
 
-  (yasnippet-snippets-initialize)
+  ;; (yasnippet-snippets-initialize)
 
   ;; org config -- to avoid messing with emacs-vanilla org (wait for layer to load)
   (with-eval-after-load 'org
-    ;; (add-to-list 'org-modules 'org-habit t)
-    (add-to-list 'org-modules 'org-protocol t)
-    (add-to-list 'org-modules 'org-roam-protocol t)
+    (add-to-list 'org-modules 'org-habit t)
+    ;; (add-to-list 'org-modules 'org-protocol t)
+    ;; (add-to-list 'org-modules 'org-roam-protocol t)
     (require 'org-habit)
-    (require 'org-protocol)
-    (require 'org-roam-protocol)
+    ;; (require 'org-protocol)
+    ;; (require 'org-roam-protocol)
     (require 'netrc)
     (setq org-todo-keywords '((sequence "TODO(t)" "PROGRESS(p)" "WAITING(w)"
                                         "|" "DONE(d)" "DELEGATED(g)" "CANCELLED(c)")))
@@ -764,11 +756,8 @@ before packages are loaded."
     (setq org-roam-directory (concat org-directory "/wiki"))
     (setq org-default-notes-file (concat org-directory "/tasks.org"))
     (setq org-agenda-files '("~/development/org/tasks.org"
-                             "~/development/org/emrys-capital.org"
-                             "~/development/org/emrys.org"
                              "~/development/org/habits.org"
                              ))
-    ;; "~/development/org/gcal.org"))
     (setq org-agenda-custom-commands
           '(("c" . "My Custom Agendas")
             ("cu" "Unscheduled TODO"
@@ -811,7 +800,6 @@ before packages are loaded."
                                    "* TODO [#8] %? [[%:link][%:description]] \nCaptured On: %U")))
     (setq org-protocol-default-template-key "p")
     (setq org-roam-link-title-format "[[%s]]")
-    (setq org-roam-completion-system 'helm)
     (setq org-roam-capture-templates '(("d" "default"
                                         plain
                                         (function org-roam--capture-get-point)
@@ -922,11 +910,7 @@ This function is called at the very end of Spacemacs initialization."
                               (solidity-flycheck--find-working-directory nil))))
      (solidity-flycheck-solc-additional-allow-paths . "@rari-capital=node_modules/@rari-capital")
      (projectile-indexing-method . hybrid)
-     (typescript-backend . tide)
      (typescript-backend . lsp)
-     (javascript-backend . tide)
-     (javascript-backend . tern)
-     (javascript-backend . lsp)
      (flycheck-command-wrapper-function lambda
                                         (command)
                                         (append
