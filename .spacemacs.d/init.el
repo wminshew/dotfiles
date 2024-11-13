@@ -91,11 +91,11 @@ This function should only modify configuration layer settings."
                  javascript-repl 'indium
                  javascript-import-tool 'import-js
                  javascript-backend 'lsp
-                 ;; javascript-lsp-linter nil
-                 ;; if using flow, js2-mode sometimes gets confused
-                 ;; js2-mode-show-strict-warnings nil
+                 javascript-lsp-linter nil
+                 js2-mode-show-strict-warnings nil
                  js2-mode-show-parse-errors nil
                  javascript-fmt-tool 'prettier
+                 javascript-fmt-on-save t
                  node-add-modules-path t
                  js2-include-node-externs t)
      ;; julia
@@ -195,8 +195,10 @@ This function should only modify configuration layer settings."
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
-                 typescript-backend 'lsp
-                 typescript-lsp-linter 'nil
+                 typescript-backend 'tide
+                 tide-tsserver-executable "node_modules/typescript/bin/tsserver"
+                 ;; typescript-backend 'lsp
+                 ;; typescript-lsp-linter nil
                  node-add-modules-path t)
      (version-control :variables
                       version-control-diff-side 'left
@@ -343,7 +345,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
-   ;; with 2 themes variants, one dark and one light)
+   ;; with 2 themes variants, one dark and one 
    dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light)
                          ;; badwolf)
