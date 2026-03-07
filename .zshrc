@@ -37,7 +37,7 @@ alias pcat='pygmentize -f terminal256 -O style=native -g'
 # . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 
 # ag completions
-. /opt/homebrew/share/zsh/site-functions
+# . /opt/homebrew/share/zsh/site-functions
 
 # Perform compinit only once a day.
 autoload -Uz compinit
@@ -71,7 +71,7 @@ bindkey '^x^e' edit-command-line
 # zprof
 
 # opam configuration
-test -r /Users/wminshew/.opam/opam-init/init.zsh && . /Users/wminshew/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# test -r /Users/wminshew/.opam/opam-init/init.zsh && . /Users/wminshew/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # increase open file limit
 # ulimit -n 1024
