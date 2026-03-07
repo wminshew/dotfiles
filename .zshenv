@@ -15,13 +15,14 @@ export PATH="$PATH:/Users/wminshew/.asdf/installs/haskell/8.10.2/bin"
 
 # set default editor
 # export VISUAL="emacsclient -c"
-# export VISUAL="nvim"
-export VISUAL="vim"
+export VISUAL="nvim"
+# export VISUAL="vim"
 export EDITOR="$VISUAL"
+export SUDO_EDITOR="$EDITOR"
 
 # asdf version manager
-unset ASDF_DIR
-. $(brew --prefix asdf)/libexec/asdf.sh
+# unset ASDF_DIR
+# . $(brew --prefix asdf)/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
@@ -40,5 +41,5 @@ export HIDE_INSTANCE_VARIABLES=@fixture_connections
 export PATH="$PATH:/Users/wminshew/.foundry/bin"
 
 # yarn global
-export PATH="$PATH:$(yarn global bin)"
+# export PATH="$PATH:$(yarn global bin)"
 

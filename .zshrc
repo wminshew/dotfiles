@@ -28,15 +28,16 @@ bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 
 alias vim="nvim"
+alias svim="sudoedit"
 alias find="fd"
 alias startx="sudo systemctl isolate graphical.target"
 alias pcat='pygmentize -f terminal256 -O style=native -g'
 
 # asdf version manager
-. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+# . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 
 # ag completions
-. /usr/local/share/zsh/site-functions
+. /opt/homebrew/share/zsh/site-functions
 
 # Perform compinit only once a day.
 autoload -Uz compinit
@@ -55,7 +56,7 @@ compinit -C
 bashcompinit
 
 # elm completions
-. ~/.zsh/elm-sh-completion/elm-completion.sh
+# . ~/.zsh/elm-sh-completion/elm-completion.sh
 
 # use 'fd' to enter vi-cmd-mode
 bindkey 'fd' vi-cmd-mode
@@ -76,12 +77,12 @@ test -r /Users/wminshew/.opam/opam-init/init.zsh && . /Users/wminshew/.opam/opam
 # ulimit -n 1024
 ulimit -S -n 4096
 
-. "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-. "$HOME/.cargo/env"
+# . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# . "$HOME/.cargo/env"
 
-rustup completions zsh > $HOME/.oh-my-zsh/completions/_rustup
-rustup completions zsh cargo > $HOME/.oh-my-zsh/completions/_cargo
+# rustup completions zsh > $HOME/.oh-my-zsh/completions/_rustup
+# rustup completions zsh cargo > $HOME/.oh-my-zsh/completions/_cargo
 
-forge completions zsh > $HOME/.oh-my-zsh/completions/_forge
-cast completions zsh > $HOME/.oh-my-zsh/completions/_cast
+# forge completions zsh > $HOME/.oh-my-zsh/completions/_forge
+# cast completions zsh > $HOME/.oh-my-zsh/completions/_cast
 
