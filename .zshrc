@@ -12,7 +12,7 @@
 # HIST_STAMPS="mm/dd/yyyy"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export plugins=(emacs vi-mode colored-man-pages colorize jsontools git kubectl gcloud docker brew macos asdf fzf httpie heroku redis-cli history-substring-search direnv)
+export plugins=(emacs vi-mode colored-man-pages colorize jsontools git gh kubectl gcloud docker brew macos asdf fzf httpie heroku redis-cli history-substring-search direnv)
 # ruby rails python golang npm tmux
 . $ZSH/oh-my-zsh.sh
 
@@ -33,18 +33,15 @@ alias find="fd"
 alias startx="sudo systemctl isolate graphical.target"
 alias pcat='pygmentize -f terminal256 -O style=native -g'
 
-# asdf version manager
-# . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
-
-# ag completions
-# . /opt/homebrew/share/zsh/site-functions
+# homebrew completions
+FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
 
 # Perform compinit only once a day.
 autoload -Uz compinit
 autoload -Uz bashcompinit
 
 setopt EXTENDEDGLOB
-for dump in $ZSH_COMPDUMP(#qN.m1); do
+for dump in $ZSH_COMPDUMP(#qN.m+1); do
   compinit
   if [[ -s "$dump" && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
     zcompile "$dump"
@@ -55,9 +52,6 @@ unsetopt EXTENDEDGLOB
 compinit -C
 bashcompinit
 
-# elm completions
-# . ~/.zsh/elm-sh-completion/elm-completion.sh
-
 # use 'fd' to enter vi-cmd-mode
 bindkey 'fd' vi-cmd-mode
 
@@ -67,17 +61,10 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
-# profiling zsh startup
-# zprof
-
-# opam configuration
-# test -r /Users/wminshew/.opam/opam-init/init.zsh && . /Users/wminshew/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
 # increase open file limit
 # ulimit -n 1024
 ulimit -S -n 4096
 
-# . "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 # . "$HOME/.cargo/env"
 
 # rustup completions zsh > $HOME/.oh-my-zsh/completions/_rustup

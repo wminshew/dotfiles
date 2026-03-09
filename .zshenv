@@ -43,3 +43,5 @@ export PATH="$PATH:/Users/wminshew/.foundry/bin"
 # yarn global
 # export PATH="$PATH:$(yarn global bin)"
 
+# claude code
+export PATH="$HOME/.local/bin:$PATH"
