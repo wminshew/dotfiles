@@ -45,10 +45,10 @@
 (setq doom-localleader-key ",")
 
 ;; Use "fd" to exit insert mode (like Spacemacs); default is "jk"
-;; (setq evil-escape-key-sequence "fd")
+(setq evil-escape-key-sequence "fd")
 ;; To also keep "jk" working alongside "fd", uncomment both lines below:
 ;; (after! evil
-;;   (evil-define-key* '(insert replace visual operator) 'global "jk" #'evil-escape))
+;; (evil-define-key* '(insert replace visual operator) 'global "jk" #'evil-escape))
 
 ;;; Core settings
 
@@ -89,6 +89,11 @@
         :localleader
         "k" #'org-timestamp-up
         "j" #'org-timestamp-down)
+  (map! :map org-mode-map
+        :n "M-h" #'org-metaleft
+        :n "M-l" #'org-metaright
+        :n "M-k" #'org-metaup
+        :n "M-j" #'org-metadown)
   (setq org-todo-keywords '((sequence "TODO(t)" "PROGRESS(p)" "WAITING(w)"
                              "|" "DONE(d)" "DELEGATED(g)" "CANCELLED(c)")))
   (setq org-highest-priority 0
