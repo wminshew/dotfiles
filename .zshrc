@@ -12,8 +12,8 @@
 # HIST_STAMPS="mm/dd/yyyy"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export plugins=(emacs vi-mode colored-man-pages colorize jsontools git gh kubectl gcloud docker brew macos asdf fzf httpie heroku redis-cli history-substring-search direnv)
-# ruby rails python golang npm tmux
+plugins=(emacs vi-mode colored-man-pages colorize jsontools git kubectl gcloud docker brew macos fzf httpie redis-cli history-substring-search direnv tmux)
+# ruby rails python golang npm
 . $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -32,9 +32,6 @@ alias svim="sudoedit"
 alias find="fd"
 alias startx="sudo systemctl isolate graphical.target"
 alias pcat='pygmentize -f terminal256 -O style=native -g'
-
-# homebrew completions
-FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
 
 # Perform compinit only once a day.
 autoload -Uz compinit
