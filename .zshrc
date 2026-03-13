@@ -12,8 +12,8 @@
 # HIST_STAMPS="mm/dd/yyyy"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(emacs vi-mode colored-man-pages colorize jsontools git kubectl gcloud docker brew macos fzf httpie redis-cli history-substring-search direnv tmux)
-# ruby rails python golang npm
+plugins=(emacs vi-mode colored-man-pages colorize jsontools git kubectl gcloud docker brew macos fzf httpie redis-cli history-substring-search tmux)
+# direnv ruby rails python golang npm
 . $ZSH/oh-my-zsh.sh
 
 # User configuration
